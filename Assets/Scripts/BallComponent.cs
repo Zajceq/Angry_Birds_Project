@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class BallComponent : MonoBehaviour
 {
-    void Start()
-    {
-        Debug.Log("Hello World!");
-    }
-
     void Update()
     {
-        Debug.Log("Time since last frame: " + Time.deltaTime);
+         Debug.Log("Frames per second: " + 1/Time.deltaTime);
     }
 }
