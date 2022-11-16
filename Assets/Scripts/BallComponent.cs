@@ -26,17 +26,18 @@ public class BallComponent : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Left mouse button has been pressed");
+            //Debug.Log("Left mouse button has been pressed");
         }
     }
+
     private void OnMouseEnter()
     {
-        Debug.Log("Mouse entering over object");
+        //Debug.Log("Mouse entering over object");
     }
 
     private void OnMouseExit()
     {
-        Debug.Log("Mouse leaving object");
+        //Debug.Log("Mouse leaving object");
     }
 
     private void OnMouseDrag() 
@@ -50,5 +51,15 @@ public class BallComponent : MonoBehaviour
     private void OnMouseUp() 
     {
         m_rigidbody.simulated = true;
+    }
+
+    public bool IsSimulated()
+    {
+        return m_rigidbody.simulated;
+    }
+
+    public float GetBallSpeed()
+    {
+        return m_rigidbody.velocity.magnitude;
     }
 }
