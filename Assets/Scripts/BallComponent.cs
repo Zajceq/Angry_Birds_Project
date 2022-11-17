@@ -5,10 +5,26 @@ using UnityEngine;
 public class BallComponent : MonoBehaviour
 {
     Rigidbody2D m_rigidbody;
+    private SpringJoint2D m_connectedJoint;
+    private Rigidbody2D m_connectedBody;
+    public float SlingStart = 1f;
+    public float MaxSpringDistance = 2.5f;
+    private LineRenderer m_lineRenderer;
+    public Transform LeftSlingPoint;
+    private TrailRenderer m_trailRenderer;
+    private bool m_hitTheGround = false;
+    private Vector3 m_startPosition;
+    private Quaternion m_startRotation;
     
     private void Start() 
     {
        m_rigidbody = GetComponent<Rigidbody2D>(); 
+       m_connectedJoint = GetComponent<SpringJoint2D>();
+       m_connectedBody = m_connectedJoint.connectedBody;
+       m_lineRenderer = GetComponent<LineRenderer>();
+       m_trailRenderer = GetComponent<TrailRenderer>();
+       m_startPosition = transform.position;
+       m_startRotation = transform.rotation;
     }
 
     private void Update() 
@@ -28,6 +44,19 @@ public class BallComponent : MonoBehaviour
         {
             //Debug.Log("Left mouse button has been pressed");
         }
+
+        if (transform.position.x > m_connectedBody.transform.position.x + SlingStart)
+        {
+            m_connectedJoint.enabled = false;
+            m_lineRenderer.enabled = false;
+            //m_trailRenderer.enabled = true;
+            m_trailRenderer.enabled = !m_hitTheGround;
+        }
+
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            Restart();
+        }
     }
 
     private void OnMouseEnter()
@@ -45,7 +74,22 @@ public class BallComponent : MonoBehaviour
         m_rigidbody.simulated = false;
 
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = new Vector3(worldPos.x, worldPos.y, 0);
+        Vector2 newBallPos = new Vector3(worldPos.x, worldPos.y);
+        //transform.position = new Vector3(worldPos.x, worldPos.y, 0);
+        float CurJoingDistance = Vector3.Distance(newBallPos, m_connectedBody.transform.position);
+
+        if (CurJoingDistance > MaxSpringDistance)
+        {
+            Vector2 direction = (newBallPos - m_connectedBody.position).normalized;
+            transform.position = m_connectedBody.position + direction * MaxSpringDistance;
+        }
+        else
+        {
+            transform.position = newBallPos;
+        }
+
+        SetLineRendererPoints();
+        m_hitTheGround = false;
     }
 
     private void OnMouseUp() 
@@ -61,5 +105,38 @@ public class BallComponent : MonoBehaviour
     public float GetBallSpeed()
     {
         return m_rigidbody.velocity.magnitude;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            m_hitTheGround = true;
+        }
+    }
+
+    private void Restart()
+    {
+        transform.position = m_startPosition;
+        transform.rotation = m_startRotation;
+
+        m_rigidbody.velocity = Vector3.zero;
+        m_rigidbody.angularVelocity = 0.0f;
+        m_rigidbody.simulated = true;
+
+        m_connectedJoint.enabled = true;
+        m_lineRenderer.enabled = true;
+        m_trailRenderer.enabled = false;
+
+        SetLineRendererPoints();
+    }
+
+    private void SetLineRendererPoints()
+    {
+        m_lineRenderer.positionCount = 3;
+        m_lineRenderer.SetPositions(new Vector3[] {
+            m_connectedBody.position,
+            transform.position,
+            LeftSlingPoint.position});
     }
 }
