@@ -15,7 +15,14 @@ public class BallComponent : MonoBehaviour
     private bool m_hitTheGround = false;
     private Vector3 m_startPosition;
     private Quaternion m_startRotation;
-    
+    private AudioSource m_audioSource;
+    public AudioClip PullSound;
+    public AudioClip ShootSound;
+    public AudioClip ImpactSound;
+    public AudioClip RestartSound;
+    private Animator m_animator;
+    private ParticleSystem m_particles;
+
     private void Start() 
     {
        m_rigidbody = GetComponent<Rigidbody2D>(); 
@@ -25,6 +32,9 @@ public class BallComponent : MonoBehaviour
        m_trailRenderer = GetComponent<TrailRenderer>();
        m_startPosition = transform.position;
        m_startRotation = transform.rotation;
+       m_audioSource = GetComponent<AudioSource>();
+       m_animator = GetComponentInChildren<Animator>();
+       m_particles = GetComponentInChildren <ParticleSystem>();
     }
 
     private void Update() 
@@ -95,6 +105,13 @@ public class BallComponent : MonoBehaviour
     private void OnMouseUp() 
     {
         m_rigidbody.simulated = true;
+        m_audioSource.PlayOneShot(ShootSound);
+        m_particles.Play();
+    }
+
+    private void OnMouseDown()
+    {
+        m_audioSource.PlayOneShot(PullSound);    
     }
 
     public bool IsSimulated()
@@ -112,6 +129,10 @@ public class BallComponent : MonoBehaviour
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             m_hitTheGround = true;
+            m_audioSource.PlayOneShot(ImpactSound);
+
+            m_animator.enabled = true;
+            m_animator.Play(0);
         }
     }
 
@@ -129,6 +150,8 @@ public class BallComponent : MonoBehaviour
         m_trailRenderer.enabled = false;
 
         SetLineRendererPoints();
+
+        m_audioSource.PlayOneShot(RestartSound);
     }
 
     private void SetLineRendererPoints()

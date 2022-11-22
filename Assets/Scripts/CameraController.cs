@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     private BallComponent followTarget;
     private Vector3 originalPosition;
-    private float smoothTime = 0.25f;
+    private float smoothTime = 0.1f;
     private Vector3 velocity = Vector3.zero;
 
     void Start()
@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
             return;
         }
         //transform.position = Vector3.MoveTowards(transform.position, originalPosition + followTarget.transform.position, followTarget.GetBallSpeed() * Time.fixedDeltaTime);
-        transform.position = Vector3.SmoothDamp(transform.position, originalPosition + followTarget.transform.position, ref velocity, smoothTime * Time.fixedDeltaTime);
+        transform.position = Vector3.SmoothDamp(transform.position, originalPosition + followTarget.transform.position, ref velocity, smoothTime, Mathf.Infinity, Time.fixedDeltaTime);
     }
 
     void Update()
