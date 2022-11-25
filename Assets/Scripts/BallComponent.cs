@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallComponent : MonoBehaviour
+public class BallComponent : InteractiveComponent
 {
-    Rigidbody2D m_rigidbody;
+    //Rigidbody2D m_rigidbody;
     private SpringJoint2D m_connectedJoint;
     private Rigidbody2D m_connectedBody;
     public float SlingStart = 1f;
@@ -13,8 +13,8 @@ public class BallComponent : MonoBehaviour
     public Transform LeftSlingPoint;
     private TrailRenderer m_trailRenderer;
     private bool m_hitTheGround = false;
-    private Vector3 m_startPosition;
-    private Quaternion m_startRotation;
+    //private Vector3 m_startPosition;
+    //private Quaternion m_startRotation;
     private AudioSource m_audioSource;
     public AudioClip PullSound;
     public AudioClip ShootSound;
@@ -22,61 +22,41 @@ public class BallComponent : MonoBehaviour
     public AudioClip RestartSound;
     private Animator m_animator;
     private ParticleSystem m_particles;
+    //private Vector3 m_startScale;
 
-    private void Start() 
+    protected override void Start() 
     {
-       m_rigidbody = GetComponent<Rigidbody2D>(); 
-       m_connectedJoint = GetComponent<SpringJoint2D>();
+        base.Start();
+
+        //m_rigidbody = GetComponent<Rigidbody2D>();
+
+        m_connectedJoint = GetComponent<SpringJoint2D>();
        m_connectedBody = m_connectedJoint.connectedBody;
        m_lineRenderer = GetComponent<LineRenderer>();
        m_trailRenderer = GetComponent<TrailRenderer>();
-       m_startPosition = transform.position;
-       m_startRotation = transform.rotation;
-       m_audioSource = GetComponent<AudioSource>();
+
+        //m_startPosition = transform.position;
+        //m_startRotation = transform.rotation;
+        //m_startScale = transform.localScale;
+
+        m_audioSource = GetComponent<AudioSource>();
        m_animator = GetComponentInChildren<Animator>();
        m_particles = GetComponentInChildren <ParticleSystem>();
+
+        GameplayManager.OnGamePaused += DoPause;
+        GameplayManager.OnGamePlaying += DoPlay;
     }
 
     private void Update() 
     {
-        if (GameplayManager.Instance.Pause)
-        {
-            m_rigidbody.simulated = false;
-        }
-        else if (!GameplayManager.Instance.Pause)
-        {
-            m_rigidbody.simulated = true;
-        }
-
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            //Debug.Log("Left mouse button has been pressed");
-        }
 
         if (transform.position.x > m_connectedBody.transform.position.x + SlingStart)
         {
             m_connectedJoint.enabled = false;
             m_lineRenderer.enabled = false;
-            //m_trailRenderer.enabled = true;
             m_trailRenderer.enabled = !m_hitTheGround;
         }
-
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            Restart();
-        }
-    }
-
-    private void OnMouseEnter()
-    {
-        //Debug.Log("Mouse entering over object");
-    }
-
-    private void OnMouseExit()
-    {
-        //Debug.Log("Mouse leaving object");
     }
 
     private void OnMouseDrag() 
@@ -85,7 +65,6 @@ public class BallComponent : MonoBehaviour
 
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 newBallPos = new Vector3(worldPos.x, worldPos.y);
-        //transform.position = new Vector3(worldPos.x, worldPos.y, 0);
         float CurJoingDistance = Vector3.Distance(newBallPos, m_connectedBody.transform.position);
 
         if (CurJoingDistance > MaxSpringDistance)
@@ -136,14 +115,32 @@ public class BallComponent : MonoBehaviour
         }
     }
 
-    private void Restart()
-    {
-        transform.position = m_startPosition;
-        transform.rotation = m_startRotation;
+    //public void DoRestart()
+    //{
+    //    transform.position = m_startPosition;
+    //    transform.rotation = m_startRotation;
+    //    transform.localScale = m_startScale;
 
-        m_rigidbody.velocity = Vector3.zero;
-        m_rigidbody.angularVelocity = 0.0f;
-        m_rigidbody.simulated = true;
+    //    m_rigidbody.velocity = Vector3.zero;
+    //    m_rigidbody.angularVelocity = 0.0f;
+    //    m_rigidbody.simulated = true;
+
+    //    m_connectedJoint.enabled = true;
+    //    m_lineRenderer.enabled = true;
+    //    m_trailRenderer.enabled = false;
+
+    //    SetLineRendererPoints();
+
+    //    m_audioSource.PlayOneShot(RestartSound);
+    //}
+
+    public override void DoRestart()
+    {
+        base.DoRestart();
+
+        //m_rigidbody.velocity = Vector3.zero;
+        //m_rigidbody.angularVelocity = 0.0f;
+        //m_rigidbody.simulated = true;
 
         m_connectedJoint.enabled = true;
         m_lineRenderer.enabled = true;
@@ -162,4 +159,14 @@ public class BallComponent : MonoBehaviour
             transform.position,
             LeftSlingPoint.position});
     }
+
+    //private void DoPlay()
+    //{
+    //    m_rigidbody.simulated = true;
+    //}
+
+    //private void DoPause()
+    //{
+    //    m_rigidbody.simulated = false;
+    //}
 }
