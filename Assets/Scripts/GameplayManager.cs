@@ -10,6 +10,9 @@ public class GameplayManager : Singleton<GameplayManager>
     public static event GameStateCallback OnGamePaused;
     public static event GameStateCallback OnGamePlaying;
 
+    private HUDController m_HUD;
+    private int m_points = 0;
+
     List<IRestartableObject> m_restartableObjects = new List<IRestartableObject>();
 
     public enum EGameState
@@ -47,26 +50,16 @@ public class GameplayManager : Singleton<GameplayManager>
     {
         m_state = EGameState.Playing;
         GetAllRestartableObjects();
+
+        m_HUD = FindObjectOfType<HUDController>();
+        Points = 0;
     }
 
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            switch (GameState)
-            {
-                case EGameState.Playing:
-                    {
-                        GameState = EGameState.Paused;
-                    }
-                    break;
-
-                case EGameState.Paused:
-                    {
-                        GameState = EGameState.Playing;
-                    }
-                    break;
-            }
+            PlayPause();
         }
 
         if (Input.GetKeyUp(KeyCode.R))
@@ -77,6 +70,15 @@ public class GameplayManager : Singleton<GameplayManager>
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
+        }
+    }
+
+    public void PlayPause()
+    {
+        switch (GameState)
+        {
+            case EGameState.Playing: { GameState = EGameState.Paused; } break;
+            case EGameState.Paused: { GameState = EGameState.Playing; } break;
         }
     }
 
@@ -94,9 +96,21 @@ public class GameplayManager : Singleton<GameplayManager>
         }
     }
 
-    private void Restart()
+    public void Restart()
     {
         foreach (var restartableObject in m_restartableObjects)
             restartableObject.DoRestart();
+        
+        Points = 0;
+    }
+
+    public int Points
+    {
+        get { return m_points; }
+        set
+        {
+            m_points = value;
+            m_HUD.UpdatePoints(m_points);
+        }
     }
 }

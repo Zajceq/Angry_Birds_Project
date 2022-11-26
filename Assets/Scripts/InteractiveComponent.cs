@@ -8,6 +8,7 @@ public abstract class InteractiveComponent : MonoBehaviour, IRestartableObject
     protected Vector3 m_startPosition;
     protected Quaternion m_startRotation;
     protected Vector3 m_startScale;
+    protected AudioSource m_audioSource;
 
     protected virtual void Start()
     {
@@ -16,6 +17,8 @@ public abstract class InteractiveComponent : MonoBehaviour, IRestartableObject
         m_startPosition = transform.position;
         m_startRotation = transform.rotation;
         m_startScale = transform.localScale;
+
+        m_audioSource = GetComponent<AudioSource>();
 
         GameplayManager.OnGamePaused += DoPause;
         GameplayManager.OnGamePlaying += DoPlay;
@@ -46,5 +49,13 @@ public abstract class InteractiveComponent : MonoBehaviour, IRestartableObject
     {
         GameplayManager.OnGamePaused -= DoPause;
         GameplayManager.OnGamePlaying -= DoPlay;
+    }
+
+    protected virtual void PlaySoundOnCollision(Collision2D collision, string layerName, AudioClip audio) 
+    {
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer(layerName))
+        {
+            m_audioSource.PlayOneShot(audio);
+        }
     }
 }
