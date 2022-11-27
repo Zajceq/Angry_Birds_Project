@@ -19,6 +19,8 @@ public class BallComponent : InteractiveComponent
     private Animator m_animator;
     private ParticleSystem m_particles;
 
+    private bool isShooted;
+
     protected override void Start() 
     {
         base.Start();
@@ -33,6 +35,8 @@ public class BallComponent : InteractiveComponent
 
         GameplayManager.OnGamePaused += DoPause;
         GameplayManager.OnGamePlaying += DoPlay;
+
+        isShooted = false;
     }
 
     private void Update() 
@@ -44,41 +48,64 @@ public class BallComponent : InteractiveComponent
             m_connectedJoint.enabled = false;
             m_lineRenderer.enabled = false;
             m_trailRenderer.enabled = !m_hitTheGround;
+
+            isShooted = true;
         }
     }
 
     private void OnMouseDrag() 
     {   
-        m_rigidbody.simulated = false;
-
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 newBallPos = new Vector3(worldPos.x, worldPos.y);
-        float CurJoingDistance = Vector3.Distance(newBallPos, m_connectedBody.transform.position);
-
-        if (CurJoingDistance > MaxSpringDistance)
+        if (GameplayManager.Instance.GameState == EGameState.Paused || isShooted == true)
         {
-            Vector2 direction = (newBallPos - m_connectedBody.position).normalized;
-            transform.position = m_connectedBody.position + direction * MaxSpringDistance;
+            return;
         }
         else
         {
-            transform.position = newBallPos;
-        }
+            m_rigidbody.simulated = false;
 
-        SetLineRendererPoints();
-        m_hitTheGround = false;
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 newBallPos = new Vector3(worldPos.x, worldPos.y);
+            float CurJoingDistance = Vector3.Distance(newBallPos, m_connectedBody.transform.position);
+
+            if (CurJoingDistance > MaxSpringDistance)
+            {
+                Vector2 direction = (newBallPos - m_connectedBody.position).normalized;
+                transform.position = m_connectedBody.position + direction * MaxSpringDistance;
+            }
+            else
+            {
+                transform.position = newBallPos;
+            }
+
+            SetLineRendererPoints();
+            m_hitTheGround = false;
+        }
     }
 
     private void OnMouseUp() 
     {
-        m_rigidbody.simulated = true;
-        m_audioSource.PlayOneShot(ShootSound);
-        m_particles.Play();
+        if (GameplayManager.Instance.GameState == EGameState.Paused || isShooted == true)
+        {
+            return;
+        }
+        else
+        {
+            m_rigidbody.simulated = true;
+            m_audioSource.PlayOneShot(ShootSound);
+            m_particles.Play();
+        }
     }
 
     private void OnMouseDown()
     {
-        m_audioSource.PlayOneShot(PullSound);    
+        if (GameplayManager.Instance.GameState == EGameState.Paused || isShooted == true)
+        {
+            return;
+        }
+        else
+        {
+            m_audioSource.PlayOneShot(PullSound);    
+        }
     }
 
     public bool IsSimulated()
@@ -103,6 +130,8 @@ public class BallComponent : InteractiveComponent
         SetLineRendererPoints();
 
         m_audioSource.PlayOneShot(RestartSound);
+
+        isShooted = false;
     }
 
     private void SetLineRendererPoints()

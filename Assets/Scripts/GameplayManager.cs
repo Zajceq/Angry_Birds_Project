@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+    public enum EGameState
+    {
+        Playing,
+        Paused
+    }
+
 public class GameplayManager : Singleton<GameplayManager>
 {
     private EGameState m_state;
@@ -13,13 +19,10 @@ public class GameplayManager : Singleton<GameplayManager>
     private HUDController m_HUD;
     private int m_points = 0;
 
+    private PauseMenuController m_pauseMenu;
+
     List<IRestartableObject> m_restartableObjects = new List<IRestartableObject>();
 
-    public enum EGameState
-    {
-        Playing,
-        Paused
-    }
 
     public EGameState GameState
     {
@@ -53,6 +56,8 @@ public class GameplayManager : Singleton<GameplayManager>
 
         m_HUD = FindObjectOfType<HUDController>();
         Points = 0;
+
+        m_pauseMenu = FindObjectOfType<PauseMenuController>();
     }
 
     void Update()
@@ -69,7 +74,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            PlayPause();
         }
     }
 
@@ -102,6 +107,7 @@ public class GameplayManager : Singleton<GameplayManager>
             restartableObject.DoRestart();
         
         Points = 0;
+        GameState = EGameState.Playing;
     }
 
     public int Points
@@ -113,4 +119,5 @@ public class GameplayManager : Singleton<GameplayManager>
             m_HUD.UpdatePoints(m_points);
         }
     }
+    
 }
