@@ -24,7 +24,8 @@ public class BeachBallLevitate : MonoBehaviour
         m_startPosition = transform.position;
         timeInAnimation = 0f;
         isAnimating = true;
-        StartCoroutine(LevitateBeachBallCoroutine());
+        //StartCoroutine(LevitateBeachBallCoroutine());
+        LevitateBeachBallAsync();
     }
 
     private void LevitateBeachBall()
@@ -40,24 +41,57 @@ public class BeachBallLevitate : MonoBehaviour
         transform.localScale = Vector3.one * m_curScale;
     }
 
-    IEnumerator LevitateBeachBallCoroutine()
+    //IEnumerator LevitateBeachBallCoroutine()
+    //{
+    //    while (true)
+    //    {
+    //        if (isAnimating)
+    //        {
+    //            yield return null;
+    //            LevitateBeachBall();
+    //            if (IsAnimationCompleted())
+    //            {
+    //                isAnimating = false;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            timeInAnimation = 0f;
+    //            yield return new WaitForSeconds(1);
+    //            isAnimating = true;
+    //        }
+    //    }
+    //}
+
+    async void LevitateBeachBallAsync()
     {
         while (true)
         {
-            if (isAnimating)
+            try
             {
-                yield return null;
-                LevitateBeachBall();
-                if (IsAnimationCompleted())
+                if (isAnimating)
                 {
-                    isAnimating = false;
+                    await Task.Yield();
+                    LevitateBeachBall();
+                    if (IsAnimationCompleted())
+                    {
+                        isAnimating = false;
+                    }
+                }
+                else
+                {
+                    timeInAnimation = 0f;
+                    await Task.Delay(TimeSpan.FromSeconds(1));
+                    isAnimating = true;
                 }
             }
-            else
+            catch (TaskCanceledException)
             {
-                timeInAnimation = 0f;
-                yield return new WaitForSeconds(1);
-                isAnimating = true;
+                break;
+            }
+            catch (MissingReferenceException)
+            {
+                break;
             }
         }
     }
@@ -66,4 +100,9 @@ public class BeachBallLevitate : MonoBehaviour
     {
         return (transform.position.y == m_startPosition.y);
     }
+
+    //private void OnDestroy()
+    //{
+    //    StopAllCoroutines();
+    //}
 }

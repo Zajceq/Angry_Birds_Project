@@ -46,6 +46,7 @@ public class BallComponent : InteractiveComponent
         while (true)
         {
             yield return null;
+            yield return null;
             if (transform.position.x > m_connectedBody.transform.position.x + SlingStart)
             {
                 m_connectedJoint.enabled = false;
