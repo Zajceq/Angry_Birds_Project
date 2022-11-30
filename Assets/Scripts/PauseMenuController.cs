@@ -75,6 +75,7 @@ public class PauseMenuController : MonoBehaviour
     private void OnPlaying()
     {
         SetPanelVisible(false);
+        SetQuestionPopupVisible(false);
     }
 
 }

@@ -37,19 +37,23 @@ public class BallComponent : InteractiveComponent
         GameplayManager.OnGamePlaying += DoPlay;
 
         isShooted = false;
+
+        StartCoroutine(CheckingSpringJoint());
     }
 
-    private void Update() 
+    IEnumerator CheckingSpringJoint()
     {
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        if (transform.position.x > m_connectedBody.transform.position.x + SlingStart)
+        while (true)
         {
-            m_connectedJoint.enabled = false;
-            m_lineRenderer.enabled = false;
-            m_trailRenderer.enabled = !m_hitTheGround;
+            yield return null;
+            if (transform.position.x > m_connectedBody.transform.position.x + SlingStart)
+            {
+                m_connectedJoint.enabled = false;
+                m_lineRenderer.enabled = false;
+                m_trailRenderer.enabled = !m_hitTheGround;
 
-            isShooted = true;
+                isShooted = true;
+            }
         }
     }
 
@@ -130,7 +134,7 @@ public class BallComponent : InteractiveComponent
         SetLineRendererPoints();
 
         m_audioSource.PlayOneShot(RestartSound);
-
+        
         isShooted = false;
     }
 
