@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,21 +8,28 @@ public class PauseMenuController : MonoBehaviour
 {
     public Button ResumeButton;
     public Button RestartButton;
-    public Button QuitButton;
+    public Button SaveButton;
+    public Button LoadButton;
+    public Button MenuButton;
     public GameObject Panel;
 
     public GameObject QuestionPopup;
     public Button YesButton;
     public Button NoButton;
 
+    public GameObject MainMenu;
+    public GameObject BackgroundMenu;
+
 
     private void Start() 
     {
-        ResumeButton.onClick.AddListener(delegate { OnResume(); });
-        RestartButton.onClick.AddListener(delegate { OnRestart(); });
-        QuitButton.onClick.AddListener(delegate { OnQuitFirst(); });
-        YesButton.onClick.AddListener(delegate { OnQuitSecond(); });
-        NoButton.onClick.AddListener(delegate { OnNotSure(); });
+        ResumeButton.onClick.AddListener(() => OnResume());
+        RestartButton.onClick.AddListener(() => OnRestart());
+        SaveButton.onClick.AddListener(() => OnSave());
+        LoadButton.onClick.AddListener(() => OnLoad());
+        MenuButton.onClick.AddListener(() => OnMenu());
+        YesButton.onClick.AddListener(() => OnYesButton());
+        NoButton.onClick.AddListener(() => OnNotSure());
 
         SetPanelVisible(false);
         SetQuestionPopupVisible(false);
@@ -34,6 +42,17 @@ public class PauseMenuController : MonoBehaviour
     {
         Panel.SetActive(visible);
     }
+
+    private void OnSave()
+    {
+        SaveManager.Instance.SaveSettings();
+    }
+
+    private void OnLoad()
+    {
+        SaveManager.Instance.LoadSettings();
+    }
+
 
     private void SetQuestionPopupVisible(bool visible)
     {
@@ -51,14 +70,16 @@ public class PauseMenuController : MonoBehaviour
         SetPanelVisible(false);
     }
 
-    private void OnQuitFirst()
+    private void OnMenu()
     {
         SetQuestionPopupVisible(true);
     }
 
-    private void OnQuitSecond()
+    private void OnYesButton()
     {
-        Application.Quit();
+        SetPanelVisible(false);
+        SetQuestionPopupVisible(false);
+        SetMainMenuVisible(true);
     }
 
     private void OnNotSure()
@@ -78,4 +99,9 @@ public class PauseMenuController : MonoBehaviour
         SetQuestionPopupVisible(false);
     }
 
+    private void SetMainMenuVisible(bool visible)
+    {
+        MainMenu.SetActive(visible);
+        BackgroundMenu.SetActive(visible);
+    }
 }

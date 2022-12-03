@@ -17,12 +17,10 @@ public class GameplayManager : Singleton<GameplayManager>
     public delegate void GameStateCallback();
     public static event GameStateCallback OnGamePaused;
     public static event GameStateCallback OnGamePlaying;
-
     private HUDController m_HUD;
-    private int m_points = 0;
-
+    public int m_points = 0;
     private PauseMenuController m_pauseMenu;
-
+    public GameSettingsDatabase GameDatabase;
     List<IRestartableObject> m_restartableObjects = new List<IRestartableObject>();
 
 
@@ -53,13 +51,16 @@ public class GameplayManager : Singleton<GameplayManager>
 
     private void Start()
     {
+        GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
+        GameObject.Instantiate(GameDatabase.SimpleAnimPropPrefab, new Vector3(15.0f, 0.0f, 0.0f), Quaternion.identity);
         m_state = EGameState.Playing;
         GetAllRestartableObjects();
 
         m_HUD = FindObjectOfType<HUDController>();
         Points = 0;
-
         m_pauseMenu = FindObjectOfType<PauseMenuController>();
+
+
     }
 
     void Update()

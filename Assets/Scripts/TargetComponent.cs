@@ -5,7 +5,7 @@ using UnityEngine;
 public class TargetComponent : InteractiveComponent
 {
     private ParticleSystem m_particles;
-    public AudioClip ImpactSound;
+    public GameSettingsDatabase GameDatabase;
 
     protected override void Start()
     {
@@ -24,6 +24,6 @@ public class TargetComponent : InteractiveComponent
             m_particles.Play();
             GameplayManager.Instance.Points += 1;
         }
-        PlaySoundOnCollision(collision, "Ball", ImpactSound);
+        PlaySoundOnCollision(collision, "Ball", GameDatabase.ImpactSound);
     }
 }

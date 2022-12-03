@@ -12,14 +12,10 @@ public class BallComponent : InteractiveComponent
     public Transform LeftSlingPoint;
     private TrailRenderer m_trailRenderer;
     private bool m_hitTheGround = false;
-    public AudioClip PullSound;
-    public AudioClip ShootSound;
-    public AudioClip ImpactSound;
-    public AudioClip RestartSound;
     private Animator m_animator;
     private ParticleSystem m_particles;
-
     private bool isShooted;
+    public GameSettingsDatabase GameDatabase;
 
     protected override void Start() 
     {
@@ -96,7 +92,7 @@ public class BallComponent : InteractiveComponent
         else
         {
             m_rigidbody.simulated = true;
-            m_audioSource.PlayOneShot(ShootSound);
+            m_audioSource.PlayOneShot(GameDatabase.ShootSound);
             m_particles.Play();
         }
     }
@@ -109,7 +105,7 @@ public class BallComponent : InteractiveComponent
         }
         else
         {
-            m_audioSource.PlayOneShot(PullSound);    
+            m_audioSource.PlayOneShot(GameDatabase.PullSound);    
         }
     }
 
@@ -134,7 +130,7 @@ public class BallComponent : InteractiveComponent
 
         SetLineRendererPoints();
 
-        m_audioSource.PlayOneShot(RestartSound);
+        m_audioSource.PlayOneShot(GameDatabase.RestartSound);
         
         isShooted = false;
     }
@@ -157,6 +153,6 @@ public class BallComponent : InteractiveComponent
             m_animator.enabled = true;
             m_animator.Play(0);
         }
-        PlaySoundOnCollision(collision, "Ground", ImpactSound);
+        PlaySoundOnCollision(collision, "Ground", GameDatabase.ImpactSound);
     }
 }
