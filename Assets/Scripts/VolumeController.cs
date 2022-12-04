@@ -7,18 +7,20 @@ public class VolumeController : MonoBehaviour
 {
     public Button VolumeUp;
     public Button VolumeDown;
-    public Image Bar;
+    //public Image Bar;
+    public Slider Slider;
 
     
     void Start()
     {
         VolumeUp.onClick.AddListener(() => OnChangeVolume(true));
         VolumeDown.onClick.AddListener(() => OnChangeVolume(false));
+        Slider.onValueChanged.AddListener((v) => { AudioListener.volume = v; });
     }
 
     private void UpdateBar()
     {
-        Bar.fillAmount = AudioListener.volume;
+        Slider.value = AudioListener.volume;
     }
 
     private void OnEnable()
