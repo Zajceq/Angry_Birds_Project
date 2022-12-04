@@ -25,10 +25,11 @@ public class SaveManager : Singleton<SaveManager>
     {
         SaveData.m_timeSinceLastSave = 0.0f;
         SaveData.m_masterVolume = AudioListener.volume;
-        LoadSettings();
 
         m_pathBin = Path.Combine(Application.persistentDataPath, "save.bin");
         m_pathJSON = Path.Combine(Application.persistentDataPath, "save.json");
+
+        LoadSettings();
     }
 
     private void Update()

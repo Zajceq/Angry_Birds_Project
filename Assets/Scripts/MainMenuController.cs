@@ -30,6 +30,8 @@ public class MainMenuController : MonoBehaviour
         SetBackgroundVisible(true);
         SetQuestionPopupVisible(false);
         SetOptionsMenuVisible(false);
+
+        GameplayManager.Instance.GameState = EGameState.Paused;
     }
 
     private void SetQuestionPopupVisible(bool visible)
