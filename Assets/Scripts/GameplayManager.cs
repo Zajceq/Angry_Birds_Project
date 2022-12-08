@@ -51,8 +51,8 @@ public class GameplayManager : Singleton<GameplayManager>
 
     private void Start()
     {
-        GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(0.0f, 4.0f, 0.0f), Quaternion.identity);
-        GameObject.Instantiate(GameDatabase.SimpleAnimPropPrefab, new Vector3(15.0f, 0.0f, 0.0f), Quaternion.identity);
+        GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(10.0f, 3.0f, 0.0f), Quaternion.identity);
+        GameObject.Instantiate(GameDatabase.SimpleAnimPropPrefab, new Vector3(20.0f, -2.75f, 0.0f), Quaternion.identity);
         m_state = EGameState.Playing;
         GetAllRestartableObjects();
 
