@@ -2,13 +2,15 @@ Shader "Unlit/Water"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _MainTex("Texture", 2D) = "white" {}
         _DisplacementTexture("Displacement", 2D) = "bump"{}
         _DisplacementX("Displacement X", Range(0, 1)) = 0
         _DisplacementY("Displacement Y", Range(0, 1)) = 0
         _ColorTint("Color Tint", Color) = (1, 1, 1, 1)
         _SpeedX("Speed along X", Range(-0.25, 0.25)) = 0
         _SpeedY("Speed along Y", Range(-0.25, 0.25)) = 0
+        _Amplitude("Amplitude", Range(0, 1)) = 0.5
+        _Frequency("Frequency", Range(1, 10)) = 3
     }
     SubShader
     {
@@ -44,11 +46,14 @@ Shader "Unlit/Water"
             fixed4 _ColorTint;
             float _SpeedX;
             float _SpeedY;
+            float _Amplitude;
+            float _Frequency;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
+                o.vertex.y += sin(_Time.y * _Frequency + o.vertex.x) * _Amplitude;
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.uv2 = TRANSFORM_TEX(v.uv2, _DisplacementTexture);
                 return o;
