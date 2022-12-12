@@ -11,6 +11,8 @@ Shader "Unlit/Water"
         _SpeedY("Speed along Y", Range(-0.25, 0.25)) = 0
         _Amplitude("Amplitude", Range(0, 1)) = 0.5
         _Frequency("Frequency", Range(1, 10)) = 3
+        //_Amplitude("Amplitude", Float) = 0.5
+        //_Frequency("Frequency", Float) = 3
     }
     SubShader
     {
@@ -61,6 +63,7 @@ Shader "Unlit/Water"
 
             fixed4 frag(v2f i) : SV_Target
             {
+                //i.uv.y += sin((_Time.y + i.uv.x) * _Frequency) * _Amplitude;
                 i.uv2.x += _Time.y * _SpeedX;
                 i.uv2.y += _Time.y * _SpeedY;
                 half disVal = tex2D(_DisplacementTexture, i.uv2).g;
