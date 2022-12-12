@@ -13865,7 +13865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b97d1f89bf57d4f98ba7289d9baf36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeToComplete: 3
+  TimeToComplete: 0
   Slider: {fileID: 1948626212}
 --- !u!1 &1949333987
 GameObject:

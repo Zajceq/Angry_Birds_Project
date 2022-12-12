@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ProgressBar : MonoBehaviour
 {
-    public float TimeToComplete = 3.0f;
+    public float CompleteSpeed = 0.2f;
     private float timeCounter;
     public Slider Slider;
 
@@ -18,12 +18,12 @@ public class ProgressBar : MonoBehaviour
 
     private void Update()
     {
-        timeCounter += Time.deltaTime / TimeToComplete;
         FillLoadingBar();
     }
 
     private void FillLoadingBar()
     {
+        timeCounter += Time.deltaTime * CompleteSpeed;
         Slider.value = Mathf.Lerp(0, 1, timeCounter);
     }
 }
