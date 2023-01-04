@@ -1,0 +1,30 @@
+ManifestFileVersion: 0
+CRC: 235720350
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 7b5d4839e1a501567368bc65df6605fe
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c21d61fe394c58399df3c6fb5c7c99b3
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/2D/Sprites/CoinSprite.png
+- Assets/2D/Sprites/HatSprite.png
+- Assets/2D/Sprites/ColumnShortSprite.png
+- Assets/2D/Sprites/ExplosionSprite.png
+- Assets/2D/Sprites/CatapultBackSprite.png
+- Assets/2D/Sprites/BowlingBallSprite.png
+- Assets/2D/Sprites/GrassThinSprite.png
+- Assets/2D/Sprites/SkyTileSprite.png
+- Assets/2D/Sprites/CatapultFrontSprite.png
+- Assets/2D/Sprites/BallSprite.png
+- Assets/2D/Sprites/PuffSprite.png
+- Assets/2D/Sprites/PlankSprite.png
+Dependencies: []

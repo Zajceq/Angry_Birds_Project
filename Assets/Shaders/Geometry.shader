@@ -2,7 +2,7 @@ Shader "Unlit/Geometry"
 {
     Properties
     {
-        _HorizontalOffset("Horizonetal Offset", Float) = 0
+        _HorizontalOffset("Horizontal Offset", Float) = 0
         _Color("Color", Color) = (1, 1, 1, 1)
         _MainTex("Texture2D", 2D) = "white" {}
     }

@@ -13,7 +13,7 @@ Shader "Unlit/VertexMovement"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="Transparent" }
         Blend SrcAlpha OneMinusSrcAlpha
         Pass
         {

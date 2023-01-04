@@ -9,7 +9,10 @@ public class HUDController : MonoBehaviour
 {
     public Button PauseButton;
     public Button RestartButton;
+    public Button LoadSpriteButton;
     public TextMeshProUGUI PointsText;
+
+    private SpriteAssetLoader spriteAssetLoader;
 
     private void Start() 
     {
@@ -25,8 +28,17 @@ public class HUDController : MonoBehaviour
         }
         );
 
+
         GameplayManager.OnGamePaused += OnPause;
         GameplayManager.OnGamePlaying += OnPlaying;
+
+        spriteAssetLoader = FindObjectOfType<SpriteAssetLoader>();
+        LoadSpriteButton.onClick.AddListener(() => OnLoadSprite());
+    }
+
+    private void OnLoadSprite()
+    {
+        spriteAssetLoader.LoadSprite();
     }
 
     private void OnPlaying()
