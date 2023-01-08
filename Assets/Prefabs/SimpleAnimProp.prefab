@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4772946271717635345}
   - component: {fileID: 4772946271717635358}
   - component: {fileID: 4772946271717635359}
+  - component: {fileID: 3645371192590156796}
   m_Layer: 0
   m_Name: BallSprite
   m_TagString: Untagged
@@ -100,6 +101,19 @@ MonoBehaviour:
   Amplitude: 1
   RotationSpeed: 50
   FinalScale: 1
+--- !u!114 &3645371192590156796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4772946271717635344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c7f935d9e0dd714487b339b55962858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteToLoad: coinsprite
 --- !u!1 &4772946272679740793
 GameObject:
   m_ObjectHideFlags: 0

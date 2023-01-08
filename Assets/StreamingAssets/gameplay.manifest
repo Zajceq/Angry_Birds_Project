@@ -1,0 +1,54 @@
+ManifestFileVersion: 0
+CRC: 4089036231
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 640324b4e7696cb71e84b2fed02df0bc
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 524d1633c59d6a9d357d944c611e8f52
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 62
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 84
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Materials/Water.mat
+- Assets/Shaders/Water.shader
+- Assets/Materials/TargetPhysicalMaterial.physicsMaterial2D
+- Assets/2D/Textures/WaterNormalMap.png
+- Assets/2D/Textures/WaterReflectionTexture.renderTexture
+- Assets/2D/Sprites/CoinSprite.png
+- Assets/2D/Sprites/HatSprite.png
+- Assets/2D/Textures/Stripes.png
+- Assets/2D/Animation/ExplosionAnim.anim
+- Assets/2D/Sprites/ColumnShortSprite.png
+- Assets/2D/Sprites/ExplosionSprite.png
+- Assets/Materials/BallPhysicalMaterial.physicsMaterial2D
+- Assets/2D/Sprites/CatapultBackSprite.png
+- Assets/Materials/CoinMaterial.mat
+- Assets/2D/Sprites/BowlingBallSprite.png
+- Assets/2D/Sprites/GrassThinSprite.png
+- Assets/2D/Sprites/CatapultFrontSprite.png
+- Assets/2D/Sprites/BallSprite.png
+- Assets/2D/Sprites/SkyTileSprite.png
+- Assets/2D/Textures/YellowBar.png
+- Assets/2D/Sprites/PuffSprite.png
+- Assets/2D/Sprites/PlankSprite.png
+- Assets/2D/Animation/Explosion.controller
+- Assets/Materials/TargetMaterial.mat
+Dependencies: []
