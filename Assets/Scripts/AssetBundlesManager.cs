@@ -75,6 +75,7 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
     public void GetAndLoadNewScene(string assetName)
     {
         ab.LoadAsset(assetName);
-        SceneManager.LoadSceneAsync(assetName);
+        String[] assetList = ab.GetAllScenePaths();
+        SceneManager.LoadSceneAsync(assetList[0]);
     }
 }
