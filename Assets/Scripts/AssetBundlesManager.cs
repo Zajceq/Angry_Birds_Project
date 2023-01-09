@@ -9,15 +9,14 @@ using UnityEngine.SceneManagement;
 public class AssetBundlesManager : Singleton<AssetBundlesManager>
 {
     public List<string> assetBundlesNames;
-    //public string assetBundleName;
     private AssetBundle ab;
     public string assetBundleURL;
     public uint abVersion;
-    public string abVersionURL;
+    //public string abVersionURL;
 
     private IEnumerator Start()
     {
-        yield return StartCoroutine(GetABVersion());
+        //yield return StartCoroutine(GetABVersion());
         foreach (var assetBundle in assetBundlesNames)
         {
             yield return StartCoroutine(LoadAssets(assetBundle, result => ab = result));
@@ -42,9 +41,10 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
 
     private IEnumerator LoadAssetsFromURL()
     {
-        UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(assetBundleURL, abVersion, 0);
-        uwr.SetRequestHeader("Content-Type", "application/json");
-        uwr.SetRequestHeader("User-Agent", "DefaultBrowser");
+        //UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(assetBundleURL, abVersion, 0);
+        UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(assetBundleURL);
+        //uwr.SetRequestHeader("Content-Type", "application/json");
+        //uwr.SetRequestHeader("User-Agent", "DefaultBrowser");
         yield return uwr.SendWebRequest();
         if (uwr.isNetworkError || uwr.isHttpError)
         {
@@ -58,19 +58,19 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
         Debug.Log(ab == null ? "Failed to download Asset Bundle" : "Asset Bundle downloaded");
     }   
     
-    private IEnumerator GetABVersion()
-    {
-        UnityWebRequest uwr = UnityWebRequest.Get(abVersionURL);
-        uwr.SetRequestHeader("Content-Type", "application/json");
-        uwr.SetRequestHeader("User-Agent", "DefaultBrowser");
-        yield return uwr.SendWebRequest();
-        if (uwr.isNetworkError || uwr.isHttpError)
-        {
-            Debug.Log(uwr.error);
-        }
-        Debug.Log(uwr.downloadHandler.text);
-        abVersion = uint.Parse(uwr.downloadHandler.text);
-    }
+    //private IEnumerator GetABVersion()
+    //{
+    //    UnityWebRequest uwr = UnityWebRequest.Get(abVersionURL);
+    //    uwr.SetRequestHeader("Content-Type", "application/json");
+    //    uwr.SetRequestHeader("User-Agent", "DefaultBrowser");
+    //    yield return uwr.SendWebRequest();
+    //    if (uwr.isNetworkError || uwr.isHttpError)
+    //    {
+    //        Debug.Log(uwr.error);
+    //    }
+    //    Debug.Log(uwr.downloadHandler.text);
+    //    abVersion = uint.Parse(uwr.downloadHandler.text);
+    //}
 
     public void GetAndLoadNewScene(string assetName)
     {
