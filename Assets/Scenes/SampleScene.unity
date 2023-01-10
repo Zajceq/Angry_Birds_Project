@@ -8231,7 +8231,6 @@ MonoBehaviour:
   LoadSpriteButton: {fileID: 1556098494}
   LoadNewSceneButton: {fileID: 654018410}
   PointsText: {fileID: 1002347741}
-  SceneName: SceneFromAssetBundle
 --- !u!1 &583555173
 GameObject:
   m_ObjectHideFlags: 0
@@ -9329,11 +9328,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assetBundlesNames:
-  - common
   - gameplay
   - ui
+  - common
+  assetBundlesList: []
   assetBundleURL: https://drive.google.com/uc?export=download&id=1T466ZhuCYxGqCk3gsaHeWx631-5BXdP-
   abVersion: 1
+  abVersionURL: https://uploads.kodilla.com/bootcamp/gamedev/abVersion.txt
+  SceneName: SceneFromAssetBundle
 --- !u!4 &722073660
 Transform:
   m_ObjectHideFlags: 0

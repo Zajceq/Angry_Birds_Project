@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1538687178
+CRC: 212787904
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 03f4268d3f1e71a80ba63e56c4a52254
+    Hash: 34e35183e7e62a4c5b7d9b7635223d8c
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5b47f08a77e5fd33ba133dc07dcef228
@@ -21,10 +21,11 @@ SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Shaders/ImageUI.shader
 - Assets/UI/EmptyButtons.png
+- Assets/2D/Textures/Stripes.png
 - Assets/Shaders/ProgressBar.shader
 - Assets/Materials/ImageUI.mat
 - Assets/UI/Elements.png
+- Assets/2D/Textures/YellowBar.png
 - Assets/UI/Icons.png
 - Assets/Materials/ProgressBar.mat
-Dependencies:
-- C:/Users/Zajceq/Desktop/Kodilla/Angry_Birds_Project_Repo/Assets/StreamingAssets/gameplay
+Dependencies: []

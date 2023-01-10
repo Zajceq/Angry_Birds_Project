@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1810049779
+CRC: 3857655211
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 640324b4e7696cb71e84b2fed02df0bc
+    Hash: 27e162d443c039cbcf964bcfe6fe9e90
   TypeTreeHash:
     serializedVersion: 2
     Hash: 524d1633c59d6a9d357d944c611e8f52
@@ -34,7 +34,6 @@ Assets:
 - Assets/2D/Textures/WaterReflectionTexture.renderTexture
 - Assets/2D/Sprites/CoinSprite.png
 - Assets/2D/Sprites/HatSprite.png
-- Assets/2D/Textures/Stripes.png
 - Assets/2D/Animation/ExplosionAnim.anim
 - Assets/2D/Sprites/ColumnShortSprite.png
 - Assets/2D/Sprites/ExplosionSprite.png
@@ -46,7 +45,6 @@ Assets:
 - Assets/2D/Sprites/CatapultFrontSprite.png
 - Assets/2D/Sprites/BallSprite.png
 - Assets/2D/Sprites/SkyTileSprite.png
-- Assets/2D/Textures/YellowBar.png
 - Assets/2D/Sprites/PuffSprite.png
 - Assets/2D/Sprites/PlankSprite.png
 - Assets/2D/Animation/Explosion.controller
