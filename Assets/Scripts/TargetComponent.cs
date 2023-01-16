@@ -6,6 +6,7 @@ public class TargetComponent : InteractiveComponent
 {
     private ParticleSystem m_particles;
     public GameSettingsDatabase GameDatabase;
+    private bool gotHit;
 
     protected override void Start()
     {
@@ -23,7 +24,14 @@ public class TargetComponent : InteractiveComponent
         {
             m_particles.Play();
             GameplayManager.Instance.Points += 1;
+
+            if (!gotHit)
+            {
+                AnalyticsManager.Instance.SendEvent("HitTarget");
+                gotHit = true;
+            }
         }
         PlaySoundOnCollision(collision, "Ball", GameDatabase.ImpactSound);
+
     }
 }
