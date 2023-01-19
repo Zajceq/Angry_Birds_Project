@@ -425,7 +425,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6990,7 +6990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1385944211920969319, guid: 0cf5ab8ca7d66a741b3eb50cfdee191d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1777177062171997593, guid: 0cf5ab8ca7d66a741b3eb50cfdee191d, type: 3}
       propertyPath: m_Name
@@ -7896,7 +7896,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.23999976, y: -0.7600001, z: -10}
+  m_LocalPosition: {x: -0.23999952, y: -0.7600001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8274,7 +8274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b8f647118e13349be851997abd66fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PauseButton: {fileID: 590263014}
+  PauseButton: {fileID: 0}
   RestartButton: {fileID: 1259707523}
   LoadSpriteButton: {fileID: 1556098494}
   LoadNewSceneButton: {fileID: 654018410}
@@ -11777,7 +11777,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341450869}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.23999976, y: -0.7600001, z: -10}
+  m_LocalPosition: {x: -0.23999952, y: -0.7600001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13635,7 +13635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1772331192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14070,7 +14070,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1857482773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14719,6 +14719,7 @@ MonoBehaviour:
   SpawnedPrefabAmount: 3
   SpawnHeight: -1
   MaxXSpawnValue: 50
+  PrefabTag: TargetFull
   GameDatabase: {fileID: 11400000, guid: df54eda9c8512f048af844a793cdfe2c, type: 2}
 --- !u!1 &1971915096
 GameObject:
@@ -14844,7 +14845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2048754025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14972,7 +14973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1385944211920969319, guid: 0cf5ab8ca7d66a741b3eb50cfdee191d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1777177062171997593, guid: 0cf5ab8ca7d66a741b3eb50cfdee191d, type: 3}
       propertyPath: m_Name
