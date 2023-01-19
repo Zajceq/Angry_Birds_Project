@@ -425,7 +425,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6988,6 +6988,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Target(1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1385944211920969319, guid: 0cf5ab8ca7d66a741b3eb50cfdee191d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1777177062171997593, guid: 0cf5ab8ca7d66a741b3eb50cfdee191d, type: 3}
       propertyPath: m_Name
       value: Target (1)
@@ -9762,7 +9766,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &877859732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12676,6 +12680,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FadingImage
       objectReference: {fileID: 0}
+    - target: {fileID: 1235336014149666721, guid: 8a7b7d5d32a822e4bbbdbbe27ab5868b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1235336014149666735, guid: 8a7b7d5d32a822e4bbbdbbe27ab5868b, type: 3}
       propertyPath: m_RootOrder
       value: 25
@@ -13627,7 +13635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1772331192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14562,6 +14570,7 @@ GameObject:
   - component: {fileID: 1952671000}
   - component: {fileID: 1952670999}
   - component: {fileID: 1952670998}
+  - component: {fileID: 1952671001}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: Untagged
@@ -14694,6 +14703,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1952671001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952670997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce0c1e8a39002a145939ff9f84a75a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SlingShot: {fileID: 790468769}
+  SpawnedPrefabAmount: 3
+  SpawnHeight: -1
+  MaxXSpawnValue: 50
+  GameDatabase: {fileID: 11400000, guid: df54eda9c8512f048af844a793cdfe2c, type: 2}
 --- !u!1 &1971915096
 GameObject:
   m_ObjectHideFlags: 0
@@ -14818,7 +14844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2048754025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14943,6 +14969,10 @@ PrefabInstance:
     - target: {fileID: 1385944211920969316, guid: 0cf5ab8ca7d66a741b3eb50cfdee191d, type: 3}
       propertyPath: m_LocalPosition.y
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1385944211920969319, guid: 0cf5ab8ca7d66a741b3eb50cfdee191d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1777177062171997593, guid: 0cf5ab8ca7d66a741b3eb50cfdee191d, type: 3}
       propertyPath: m_Name

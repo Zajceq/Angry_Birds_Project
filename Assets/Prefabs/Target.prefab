@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1385944211920969316}
   m_Layer: 8
   m_Name: Target
-  m_TagString: Untagged
+  m_TagString: TargetFull
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,9 +41,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1385944211920969316}
     m_Modifications:
+    - target: {fileID: 5291607480591951605, guid: 024150291bcf0f94bbf88d51367a3c8e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5291607481101983504, guid: 024150291bcf0f94bbf88d51367a3c8e, type: 3}
       propertyPath: m_Name
       value: UpPlank
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291607481101983504, guid: 024150291bcf0f94bbf88d51367a3c8e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5291607481101983505, guid: 024150291bcf0f94bbf88d51367a3c8e, type: 3}
       propertyPath: m_RootOrder
@@ -103,9 +111,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1385944211920969316}
     m_Modifications:
+    - target: {fileID: 5291607480591951605, guid: 024150291bcf0f94bbf88d51367a3c8e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5291607481101983504, guid: 024150291bcf0f94bbf88d51367a3c8e, type: 3}
       propertyPath: m_Name
       value: LeftPlank
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291607481101983504, guid: 024150291bcf0f94bbf88d51367a3c8e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5291607481101983505, guid: 024150291bcf0f94bbf88d51367a3c8e, type: 3}
       propertyPath: m_RootOrder
@@ -165,9 +181,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1385944211920969316}
     m_Modifications:
+    - target: {fileID: 5291607480591951605, guid: 024150291bcf0f94bbf88d51367a3c8e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5291607481101983504, guid: 024150291bcf0f94bbf88d51367a3c8e, type: 3}
       propertyPath: m_Name
       value: RightPlank
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291607481101983504, guid: 024150291bcf0f94bbf88d51367a3c8e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5291607481101983505, guid: 024150291bcf0f94bbf88d51367a3c8e, type: 3}
       propertyPath: m_RootOrder
