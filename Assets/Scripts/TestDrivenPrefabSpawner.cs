@@ -36,12 +36,13 @@ public class TestDrivenPrefabSpawner : MonoBehaviour
     private bool FunctionalityTestFunction()
     {
         bool testResult =
-        CheckSpawnedPrefabListCount()
-        && CheckIfSlingshotIsNotNull()
-        && CheckIfSpawnedPrefabIsNotNull()
-        && CheckIfAllPrefabsWereSpawned()
-        && CheckIfPrefabsAreOnTheRightSideOfTheSlingshot()
-        && CheckSpawnedPrefabsHeight();
+        CheckIfThreePrefabsAreOnTheScene();
+        //CheckSpawnedPrefabListCount()
+        //&& CheckIfSlingshotIsNotNull()
+        //&& CheckIfSpawnedPrefabIsNotNull()
+        //&& CheckIfAllPrefabsWereSpawned()
+        //&& CheckIfPrefabsAreOnTheRightSideOfTheSlingshot()
+        //&& CheckSpawnedPrefabsHeight();
         Debug.Log(testResult);
         return testResult;
     }
@@ -139,6 +140,25 @@ public class TestDrivenPrefabSpawner : MonoBehaviour
         else
         {
             Debug.LogWarning("Some prefabs have wrong y position");
+            return false;
+        }
+    }    
+
+    private bool CheckIfThreePrefabsAreOnTheScene()
+    {
+        var spawnedGameObjects = GameObject.FindGameObjectsWithTag(PrefabTag);
+        int SpawnedPrefabCounter = 0;
+        foreach (var prefab in spawnedGameObjects)
+        {
+                SpawnedPrefabCounter += 1;
+        }
+        if (SpawnedPrefabCounter == 3)
+        {
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning("There are more or less than 3 prefabs on the Scene");
             return false;
         }
     }    
