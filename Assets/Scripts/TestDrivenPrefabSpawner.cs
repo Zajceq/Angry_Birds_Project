@@ -8,7 +8,7 @@ public class TestDrivenPrefabSpawner : MonoBehaviour
     [SerializeField] private int SpawnedPrefabAmount;
     [SerializeField] private float SpawnHeight;
     [SerializeField] private float MaxXSpawnValue = 10.0f;
-    [SerializeField] private string PrefabTag = "TargetFull";
+    [SerializeField] public string PrefabTag = "TargetFull";
     public GameSettingsDatabase GameDatabase;
     private List<GameObject> SpawnedPrefabList;
 
@@ -24,13 +24,13 @@ public class TestDrivenPrefabSpawner : MonoBehaviour
         SpawnPrefabs();
     }
 
-    private void SpawnPrefabs()
+    public void SpawnPrefabs()
     {
         foreach (var prefab in SpawnedPrefabList)
         {
             Instantiate(prefab, new Vector3(Random.Range(SlingShot.transform.position.x, MaxXSpawnValue), SpawnHeight, 0.0f), Quaternion.identity);
         }
-        FunctionalityTestFunction();
+        //FunctionalityTestFunction();
     }
 
     private bool FunctionalityTestFunction()
@@ -147,11 +147,12 @@ public class TestDrivenPrefabSpawner : MonoBehaviour
     private bool CheckIfThreePrefabsAreOnTheScene()
     {
         var spawnedGameObjects = GameObject.FindGameObjectsWithTag(PrefabTag);
-        int SpawnedPrefabCounter = 0;
-        foreach (var prefab in spawnedGameObjects)
-        {
-                SpawnedPrefabCounter += 1;
-        }
+        //int SpawnedPrefabCounter = 0;
+        int SpawnedPrefabCounter = spawnedGameObjects.Length;
+        //foreach (var prefab in spawnedGameObjects)
+        //{
+        //        SpawnedPrefabCounter += 1;
+        //}
         if (SpawnedPrefabCounter == 3)
         {
             return true;
