@@ -10,7 +10,6 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
 {
     public List<string> assetBundlesNames;
     public List<AssetBundle> assetBundlesList;
-    //private AssetBundle ab;
     private AssetBundle abURL;
     public string assetBundleURL;
     public uint abVersion;
@@ -20,12 +19,14 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
     private IEnumerator Start()
     {
         yield return StartCoroutine(GetABVersion());
-        foreach (var assetBundle in assetBundlesNames)
+        //foreach (var assetBundle in assetBundlesNames)
+        //{
+        //    yield return StartCoroutine(LoadAssets(assetBundle, result => assetBundlesList.Add(result)));
+        //}
+        for (int i = 0; i < assetBundlesNames.Count; i++)
         {
-            //yield return StartCoroutine(LoadAssets(assetBundle, result => ab = result));
-            yield return StartCoroutine(LoadAssets(assetBundle, result => assetBundlesList.Add(result)));
+            yield return StartCoroutine(LoadAssets(assetBundlesNames[i], result => assetBundlesList.Add(result)));
         }
-        yield return StartCoroutine(LoadAssetsFromURL());
     }
 
     private IEnumerator LoadAssets(string name, Action<AssetBundle> bundle)
@@ -40,19 +41,15 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
 
     public Sprite GetSprite(string assetName)
     {
-        //return ab.LoadAsset<Sprite>(assetName);
         AssetBundle ab = assetBundlesList.Find(bundle => bundle.LoadAsset<Sprite>(assetName));
         return ab.LoadAsset<Sprite>(assetName);
     }
 
     private IEnumerator LoadAssetsFromURL()
     {
-        //UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(assetBundleURL, abVersion, 0);
         UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(assetBundleURL);
-        //uwr.SetRequestHeader("Content-Type", "application/json");
-        //uwr.SetRequestHeader("User-Agent", "DefaultBrowser");
         yield return uwr.SendWebRequest();
-        if (uwr.isNetworkError || uwr.isHttpError)
+        if (uwr.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
         {
             Debug.Log(uwr.error);
         }
@@ -70,7 +67,7 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
         uwr.SetRequestHeader("Content-Type", "application/json");
         uwr.SetRequestHeader("User-Agent", "DefaultBrowser");
         yield return uwr.SendWebRequest();
-        if (uwr.isNetworkError || uwr.isHttpError)
+        if (uwr.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
         {
             Debug.Log(uwr.error);
         }
@@ -80,15 +77,20 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
 
     public void GetAndLoadNewScene()
     {
-        //ab.LoadAsset(assetName);
-        String[] assetArray = abURL.GetAllScenePaths();
-        foreach (var asset in assetArray)
+        string[] assetArray = abURL.GetAllScenePaths();
+        //foreach (var asset in assetArray)
+        //{
+        //    if (asset.Contains(SceneName))
+        //    {
+        //        SceneManager.LoadSceneAsync(asset);
+        //    }
+        //}
+        for (int i = 0; i < assetArray.Length; i++)
         {
-            if (asset.Contains(SceneName))
+            if (assetArray[i].Contains(SceneName))
             {
-                SceneManager.LoadSceneAsync(asset);
+                SceneManager.LoadSceneAsync(assetArray[i]);
             }
         }
-        //SceneManager.LoadSceneAsync(assetArray[1]);
     }
 }

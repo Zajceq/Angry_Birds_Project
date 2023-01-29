@@ -7,7 +7,6 @@ public class VolumeController : MonoBehaviour
 {
     public Button VolumeUp;
     public Button VolumeDown;
-    //public Image Bar;
     public Slider Slider;
 
     

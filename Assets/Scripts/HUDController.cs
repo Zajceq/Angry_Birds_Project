@@ -13,7 +13,6 @@ public class HUDController : MonoBehaviour
     public Button LoadNewSceneButton;
     public TextMeshProUGUI PointsText;
 
-    //private SpriteAssetLoader spriteAssetLoader;
     private AssetBundlesManager assetBundleManager;
 
     private SpriteAssetLoader[] objectsForSpritesChanges;
@@ -36,7 +35,6 @@ public class HUDController : MonoBehaviour
         GameplayManager.OnGamePaused += OnPause;
         GameplayManager.OnGamePlaying += OnPlaying;
 
-        //spriteAssetLoader = FindObjectOfType<SpriteAssetLoader>();
         assetBundleManager = FindObjectOfType<AssetBundlesManager>();
         LoadSpriteButton.onClick.AddListener(() => OnLoadSprite());
         LoadNewSceneButton.onClick.AddListener(() => OnNewSceneLoad());
@@ -45,10 +43,12 @@ public class HUDController : MonoBehaviour
     private void OnLoadSprite()
     {
         objectsForSpritesChanges = FindObjectsOfType<SpriteAssetLoader>();
-        foreach (var item in objectsForSpritesChanges)
-        {
-            item.GetComponent<SpriteAssetLoader>().LoadSprite();
-        }
+        //foreach (var item in objectsForSpritesChanges)
+        //{
+        //    item.GetComponent<SpriteAssetLoader>().LoadSprite();
+        //}
+        for (int i = 0; i < objectsForSpritesChanges.Length; i++)
+            objectsForSpritesChanges[i].GetComponent<SpriteAssetLoader>().LoadSprite();
     }
 
     private void OnNewSceneLoad()

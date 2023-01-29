@@ -24,7 +24,6 @@ public class BeachBallLevitate : MonoBehaviour
         m_startPosition = transform.position;
         timeInAnimation = 0f;
         isAnimating = true;
-        //StartCoroutine(LevitateBeachBallCoroutine());
         LevitateBeachBallAsync();
     }
 
@@ -40,28 +39,6 @@ public class BeachBallLevitate : MonoBehaviour
         m_curScale = -Mathf.Abs(Mathf.Sin(Mathf.Lerp(0, Mathf.PI, timeInAnimation) * FinalScale));
         transform.localScale = Vector3.one * m_curScale;
     }
-
-    //IEnumerator LevitateBeachBallCoroutine()
-    //{
-    //    while (true)
-    //    {
-    //        if (isAnimating)
-    //        {
-    //            yield return null;
-    //            LevitateBeachBall();
-    //            if (IsAnimationCompleted())
-    //            {
-    //                isAnimating = false;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            timeInAnimation = 0f;
-    //            yield return new WaitForSeconds(1);
-    //            isAnimating = true;
-    //        }
-    //    }
-    //}
 
     async void LevitateBeachBallAsync()
     {
@@ -100,9 +77,4 @@ public class BeachBallLevitate : MonoBehaviour
     {
         return (transform.position.y == m_startPosition.y);
     }
-
-    //private void OnDestroy()
-    //{
-    //    StopAllCoroutines();
-    //}
 }

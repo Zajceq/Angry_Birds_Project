@@ -21,7 +21,6 @@ public class CameraController : MonoBehaviour
         {
             return;
         }
-        //transform.position = Vector3.MoveTowards(transform.position, originalPosition + followTarget.transform.position, followTarget.GetBallSpeed() * Time.fixedDeltaTime);
         transform.position = Vector3.SmoothDamp(transform.position, originalPosition + followTarget.transform.position, ref velocity, smoothTime, Mathf.Infinity, Time.fixedDeltaTime);
     }
 

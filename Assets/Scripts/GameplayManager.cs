@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
-using System.Threading.Tasks;
 
     public enum EGameState
     {
@@ -19,7 +17,6 @@ public class GameplayManager : Singleton<GameplayManager>
     public static event GameStateCallback OnGamePlaying;
     private HUDController m_HUD;
     public int m_points = 0;
-    private PauseMenuController m_pauseMenu;
     public GameSettingsDatabase GameDatabase;
     List<IRestartableObject> m_restartableObjects = new List<IRestartableObject>();
 
@@ -51,16 +48,12 @@ public class GameplayManager : Singleton<GameplayManager>
 
     private void Start()
     {
-        //GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(10.0f, 3.0f, 0.0f), Quaternion.identity);
         GameObject.Instantiate(GameDatabase.SimpleAnimPropPrefab, new Vector3(20.0f, -2.75f, 0.0f), Quaternion.identity);
         m_state = EGameState.Playing;
         GetAllRestartableObjects();
 
         m_HUD = FindObjectOfType<HUDController>();
         Points = 0;
-        m_pauseMenu = FindObjectOfType<PauseMenuController>();
-
-
     }
 
     void Update()
@@ -95,19 +88,28 @@ public class GameplayManager : Singleton<GameplayManager>
         m_restartableObjects.Clear();
 
         GameObject[] rootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
-        foreach (var rootGameObject in rootGameObjects)
-        {
-            IRestartableObject[] childrenInterfaces = rootGameObject.GetComponentsInChildren<IRestartableObject>();
+        //foreach (var rootGameObject in rootGameObjects)
+        //{
+        //    IRestartableObject[] childrenInterfaces = rootGameObject.GetComponentsInChildren<IRestartableObject>();
 
-            foreach (var childInterface in childrenInterfaces)
-                m_restartableObjects.Add(childInterface);
+        //    foreach (var childInterface in childrenInterfaces)
+        //        m_restartableObjects.Add(childInterface);
+        //}
+        for (int i = 0; i < rootGameObjects.Length; i++)
+        {
+            IRestartableObject[] childrenInterfaces = rootGameObjects[i].GetComponentsInChildren<IRestartableObject>();
+
+            for (int j = 0; j < childrenInterfaces.Length; j++)
+                m_restartableObjects.Add(childrenInterfaces[j]);
         }
     }
 
     public void Restart()
     {
-        foreach (var restartableObject in m_restartableObjects)
-            restartableObject.DoRestart();
+        //foreach (var restartableObject in m_restartableObjects)
+        //    restartableObject.DoRestart();
+        for (int i = 0; i < m_restartableObjects.Count; i++)
+            m_restartableObjects[i].DoRestart();
         
         Points = 0;
         GameState = EGameState.Playing;
@@ -118,9 +120,11 @@ public class GameplayManager : Singleton<GameplayManager>
         get { return m_points; }
         set
         {
-            m_points = value;
-            m_HUD.UpdatePoints(m_points);
+            if (m_points != value)
+            {
+                m_points = value;
+                m_HUD.UpdatePoints(m_points);
+            }
         }
     }
-    
 }

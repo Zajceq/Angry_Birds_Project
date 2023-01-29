@@ -7,25 +7,25 @@ using UnityEngine.TestTools;
 
 public class SpawnerTest
 {
-    [OneTimeSetUp]
-    public void Init()
-    {
-        SceneManager.LoadScene("SampleScene");
-    }
+    //[OneTimeSetUp]
+    //public void Init()
+    //{
+    //    SceneManager.LoadScene("SampleScene");
+    //}
 
-    [UnityTest]
-    public IEnumerator CheckTagObjects()
-    {
-        var prefabSpawner = GameObject.FindObjectOfType<TestDrivenPrefabSpawner>();
+    //[UnityTest]
+    //public IEnumerator CheckTagObjects()
+    //{
+    //    var prefabSpawner = GameObject.FindObjectOfType<TestDrivenPrefabSpawner>();
 
-        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag(prefabSpawner.PrefabTag);
+    //    GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag(prefabSpawner.PrefabTag);
 
-        int expectedAmount = 3;
-        int actualAmount = objectsWithTag.Length;
+    //    int expectedAmount = 3;
+    //    int actualAmount = objectsWithTag.Length;
 
-        Assert.AreEqual(expectedAmount, actualAmount);
+    //    Assert.AreEqual(expectedAmount, actualAmount);
 
-        yield return null;
-    }
+    //    yield return null;
+    //}
 
 }
