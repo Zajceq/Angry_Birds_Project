@@ -31,7 +31,8 @@ public class TargetPooler : MonoBehaviour
             GameObject obj = GetPooledObject();
             var randomPos = new Vector3(Random.Range(SlingShot.transform.position.x, MaxXSpawnValue), SpawnHeight, 0.0f);
             if (obj == null) return;
-            obj.transform.position = randomPos;
+            //obj.transform.position = randomPos;
+            obj.transform.position = new Vector3(5,-1,0);
             obj.SetActive(true);
         }
     }
