@@ -54,6 +54,108 @@ public class BallComponent : InteractiveComponent
         }
     }
 
+    private void Update()
+    {
+    #if UNITY_IOS || UNITY_ANDROID
+            UpdateTouch();
+    #endif
+    }
+
+#if UNITY_IOS || UNITY_ANDROID
+    private void UpdateTouch()
+    {
+        if (Input.touchCount <= 0)
+            return;
+
+        switch (Input.touches[0].phase)
+        {
+            case TouchPhase.Began:
+                {
+                    Ray ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
+                    RaycastHit hit;
+
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        if (hit.collider != null && hit.collider.gameObject == this.gameObject)
+                            OnTouchDown();
+                    }
+                }
+                break;
+
+            case TouchPhase.Moved:
+                {
+                    OnTouchDrag();
+                }
+                break;
+
+            case TouchPhase.Ended:
+                {
+                    OnTouchUp();
+                }
+                break;
+        };
+    }
+
+    private void OnTouchDrag()
+    {
+        if (GameplayManager.Instance.GameState == EGameState.Paused || isShooted == true)
+        {
+            return;
+        }
+        else
+        {
+            if (Input.touchCount <= 0)
+                return;
+
+            m_rigidbody.simulated = false;
+
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
+            Vector2 newBallPos = new Vector3(worldPos.x, worldPos.y);
+            float CurJoingDistance = Vector3.Distance(newBallPos, m_connectedBody.transform.position);
+
+            if (CurJoingDistance > MaxSpringDistance)
+            {
+                Vector2 direction = (newBallPos - m_connectedBody.position).normalized;
+                transform.position = m_connectedBody.position + direction * MaxSpringDistance;
+            }
+            else
+            {
+                transform.position = newBallPos;
+            }
+
+            SetLineRendererPoints();
+            m_hitTheGround = false;
+        }
+    }
+
+    private void OnTouchUp()
+    {
+        if (GameplayManager.Instance.GameState == EGameState.Paused || isShooted == true)
+        {
+            return;
+        }
+        else
+        {
+            m_rigidbody.simulated = true;
+            m_audioSource.PlayOneShot(GameDatabase.ShootSound);
+            m_particles.Play();
+        }
+    }
+
+    private void OnTouchDown()
+    {
+        if (GameplayManager.Instance.GameState == EGameState.Paused || isShooted == true)
+        {
+            return;
+        }
+        else
+        {
+            m_audioSource.PlayOneShot(GameDatabase.PullSound);
+        }
+    }
+#endif
+
+#if UNITY_EDITOR
     private void OnMouseDrag() 
     {   
         if (GameplayManager.Instance.GameState == EGameState.Paused || isShooted == true)
@@ -108,6 +210,7 @@ public class BallComponent : InteractiveComponent
             m_audioSource.PlayOneShot(GameDatabase.PullSound);    
         }
     }
+#endif
 
     public bool IsSimulated()
     {
