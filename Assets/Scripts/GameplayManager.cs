@@ -88,13 +88,6 @@ public class GameplayManager : Singleton<GameplayManager>
         m_restartableObjects.Clear();
 
         GameObject[] rootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
-        //foreach (var rootGameObject in rootGameObjects)
-        //{
-        //    IRestartableObject[] childrenInterfaces = rootGameObject.GetComponentsInChildren<IRestartableObject>();
-
-        //    foreach (var childInterface in childrenInterfaces)
-        //        m_restartableObjects.Add(childInterface);
-        //}
         for (int i = 0; i < rootGameObjects.Length; i++)
         {
             IRestartableObject[] childrenInterfaces = rootGameObjects[i].GetComponentsInChildren<IRestartableObject>();
@@ -106,8 +99,6 @@ public class GameplayManager : Singleton<GameplayManager>
 
     public void Restart()
     {
-        //foreach (var restartableObject in m_restartableObjects)
-        //    restartableObject.DoRestart();
         for (int i = 0; i < m_restartableObjects.Count; i++)
             m_restartableObjects[i].DoRestart();
         

@@ -9,16 +9,20 @@ public class GameSceneManager : Singleton<GameSceneManager>
 
     private void Awake()
     {
-        lastLevelIndex = SceneManager.sceneCountInBuildSettings;   
+        lastLevelIndex = SceneManager.sceneCountInBuildSettings;
+        DontDestroyOnLoad(gameObject);
     }
 
 
     public void LoadNextScene(int currentSceneIndex)
     {
-        if (currentSceneIndex < lastLevelIndex)
+        if (currentSceneIndex < lastLevelIndex - 1)
         {
             SceneManager.LoadSceneAsync(currentSceneIndex + 1);
         }
-        SceneManager.LoadSceneAsync(0);
+        else
+        {
+            SceneManager.LoadSceneAsync(0);
+        }
     }
 }
