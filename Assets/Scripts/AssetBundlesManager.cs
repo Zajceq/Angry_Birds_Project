@@ -19,10 +19,6 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
     private IEnumerator Start()
     {
         yield return StartCoroutine(GetABVersion());
-        //foreach (var assetBundle in assetBundlesNames)
-        //{
-        //    yield return StartCoroutine(LoadAssets(assetBundle, result => assetBundlesList.Add(result)));
-        //}
         for (int i = 0; i < assetBundlesNames.Count; i++)
         {
             yield return StartCoroutine(LoadAssets(assetBundlesNames[i], result => assetBundlesList.Add(result)));
@@ -78,13 +74,6 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
     public void GetAndLoadNewScene()
     {
         string[] assetArray = abURL.GetAllScenePaths();
-        //foreach (var asset in assetArray)
-        //{
-        //    if (asset.Contains(SceneName))
-        //    {
-        //        SceneManager.LoadSceneAsync(asset);
-        //    }
-        //}
         for (int i = 0; i < assetArray.Length; i++)
         {
             if (assetArray[i].Contains(SceneName))

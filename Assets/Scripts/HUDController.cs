@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class HUDController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class HUDController : MonoBehaviour
     public TextMeshProUGUI PointsText;
 
     private AssetBundlesManager assetBundleManager;
+    private GameSceneManager gameSceneManager;
 
     private SpriteAssetLoader[] objectsForSpritesChanges;
 
@@ -36,6 +38,7 @@ public class HUDController : MonoBehaviour
         GameplayManager.OnGamePlaying += OnPlaying;
 
         assetBundleManager = FindObjectOfType<AssetBundlesManager>();
+        gameSceneManager = FindObjectOfType<GameSceneManager>();
         LoadSpriteButton.onClick.AddListener(() => OnLoadSprite());
         LoadNewSceneButton.onClick.AddListener(() => OnNewSceneLoad());
     }
@@ -53,7 +56,8 @@ public class HUDController : MonoBehaviour
 
     private void OnNewSceneLoad()
     {
-        assetBundleManager.GetAndLoadNewScene();
+        //assetBundleManager.GetAndLoadNewScene();
+        gameSceneManager.LoadNextScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnPlaying()
