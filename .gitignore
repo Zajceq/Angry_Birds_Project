@@ -59,8 +59,10 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-#PlayMaker
+# PlayMaker
 
-#/Assets/PlayMaker/
-#/Assets/Plugins/PlayMaker/
-#/Assets/Gizmos/
+PlayMaker/
+/Assets/PlayMaker/
+/Assets/Plugins/PlayMaker/
+/Assets/Gizmos/
+/Assets/PlayMaker Custom Actions/
