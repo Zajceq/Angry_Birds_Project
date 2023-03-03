@@ -2,18 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetComponent : InteractiveComponent
+public class EnemyController : InteractiveComponent
 {
-    private ParticleSystem m_particles;
     public GameSettingsDatabase GameDatabase;
     private bool gotHit;
+    [SerializeField] private int points = 1;
 
     protected override void Start()
     {
         base.Start();
-
-        m_particles = GetComponentInChildren<ParticleSystem>();
-
         GameplayManager.OnGamePaused += DoPause;
         GameplayManager.OnGamePlaying += DoPlay;
     }
@@ -22,9 +19,6 @@ public class TargetComponent : InteractiveComponent
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ball"))
         {
-            m_particles.Play();
-            //GameplayManager.Instance.Points += 1;
-
             if (!gotHit)
             {
                 AnalyticsManager.Instance.SendEvent("HitTarget");
@@ -35,6 +29,12 @@ public class TargetComponent : InteractiveComponent
 
     }
 
+    private void OnDisable()
+    {
+        GameplayManager.Instance.Points += points;
+        EnemyManager.Instance.enemiesOnTheScene -= 1;
+        EnemyManager.Instance.CheckIfThereIsNoEnemiesLeft();
+    }
     public override void DoRestart()
     {
         base.DoRestart();

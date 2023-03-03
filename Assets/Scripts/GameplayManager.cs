@@ -19,6 +19,8 @@ public class GameplayManager : Singleton<GameplayManager>
     public int m_points = 0;
     public GameSettingsDatabase GameDatabase;
     List<IRestartableObject> m_restartableObjects = new List<IRestartableObject>();
+    private GameSceneManager gameSceneManager;
+    public EnemyManager enemyManager;
 
 
     public EGameState GameState
@@ -118,4 +120,9 @@ public class GameplayManager : Singleton<GameplayManager>
             }
         }
     }
+
+    //public void LoadNextLevel()
+    //{
+    //    gameSceneManager.LoadNextScene(SceneManager.GetActiveScene().buildIndex);
+    //}
 }

@@ -12,10 +12,14 @@ public class GameSceneManager : Singleton<GameSceneManager>
         lastLevelIndex = SceneManager.sceneCountInBuildSettings;
         DontDestroyOnLoad(gameObject);
     }
-
-
-    public void LoadNextScene(int currentSceneIndex)
+    private void OnEnable()
     {
+        EnemyManager.onAllEnemiesKilled += LoadNextScene;
+    }
+
+    public void LoadNextScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (currentSceneIndex < lastLevelIndex - 1)
         {
             SceneManager.LoadSceneAsync(currentSceneIndex + 1);
@@ -24,5 +28,10 @@ public class GameSceneManager : Singleton<GameSceneManager>
         {
             SceneManager.LoadSceneAsync(0);
         }
+    }
+
+    private void OnDisable()
+    {
+        EnemyManager.onAllEnemiesKilled -= LoadNextScene;
     }
 }
