@@ -56,7 +56,7 @@ public class HUDController : MonoBehaviour
 
     private void OnNewSceneLoad()
     {
-        gameSceneManager.LoadNextScene();
+        //gameSceneManager.LoadNextScene();
     }
 
     private void OnPlaying()
